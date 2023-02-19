@@ -10,6 +10,5 @@ module.exports = composePlugins(withNx(), withReact(), (config, { options, conte
 
   config.output.path = path.resolve(__dirname, "../../dist/apps/main")
   config.output.publicPath = path.resolve(__dirname, "../../dist/apps/main")
-  console.log(config)
   return config;
 });

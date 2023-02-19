@@ -1,12 +1,19 @@
-import "@poe-companion/translations"
 import { ask, confirm, open } from '@tauri-apps/api/dialog';
 import { trace, info, error, attachConsole } from "tauri-plugin-log-api";
 import { core } from "@poe-companion/core"
 import { useTranslation } from 'react-i18next';
+import styled from '@emotion/styled';
+import { Button } from "@poe-companion/react-components"
+
+
 
 export function App() {
   const { t, i18n } = useTranslation();
   core();
+
+  const SomeText = styled.div`
+  color: ${props => props.theme.color.primary};
+`
 
   const doStuff = async () => {
 
@@ -38,7 +45,7 @@ export function App() {
   }
 
   const changeL = () => {
-    i18n.changeLanguage("pl")
+    i18n.changeLanguage("en")
   }
 
   return (
@@ -49,6 +56,9 @@ export function App() {
       <p>{t('description.part2')}</p>
       <button onClick={doStuff}>Click</button>
       <button onClick={changeL}>Change to pl</button>
+      <SomeText>A</SomeText>
+      <Button>Button</Button>
+      button
     </>
   );
 }

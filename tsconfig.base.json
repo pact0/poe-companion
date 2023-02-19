@@ -10,26 +10,20 @@
     "importHelpers": true,
     "target": "es2015",
     "module": "esnext",
-    "lib": [
-      "es2017",
-      "dom"
-    ],
+    "lib": ["es2017", "dom"],
+    "types": ["@emotion/react/types/css-prop"],
+    "jsx": "react-jsx",
+    "jsxImportSource": "@emotion/react",
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "baseUrl": ".",
     "paths": {
-      "@poe-companion/core": [
-        "libs/core/src/index.ts"
-      ],
-      "@poe-companion/translations": [
-        "libs/translations/src/index.ts"
-      ]
+      "@poe-companion/core": ["libs/core/src/index.ts"],
+      "@poe-companion/react-components": ["libs/react-components/src/index.ts"],
+      "@poe-companion/translations": ["libs/translations/src/index.ts"]
     }
   },
-  "exclude": [
-    "node_modules",
-    "tmp"
-  ]
+  "exclude": ["node_modules", "tmp"]
 }
