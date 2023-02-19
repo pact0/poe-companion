@@ -1,0 +1,13 @@
+{
+  "name": "tauri",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/tauri/src",
+  "projectType": "application",
+  "targets": {
+    "serve": {
+      "command": "tauri dev",
+      "cwd": "apps/tauri"
+    }
+  },
+  "tags": []
+}
