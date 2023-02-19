@@ -1,11 +1,7 @@
 # translations
 
-This library was generated with [Nx](https://nx.dev).
+This library provieds translations for the whole app.
 
-## Running unit tests
+## Adding translations
 
-Run `nx test translations` to execute the unit tests via [Jest](https://jestjs.io).
-
-## Running lint
-
-Run `nx lint translations` to execute the lint via [ESLint](https://eslint.org/).
+English is considered base and fallback, to have other language support, provide adequate key value pairs for a language. To do so edit json files for them in `src/languages`
