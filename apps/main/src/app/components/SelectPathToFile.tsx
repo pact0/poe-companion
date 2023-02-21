@@ -1,10 +1,10 @@
-import { Button, TextField } from '@mui/material';
+import { TextField } from '@mui/material';
 import { SettingsManager } from '@poe-companion/settings-manager';
 import { open } from '@tauri-apps/api/dialog';
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react';
 import { info } from 'tauri-plugin-log-api';
 
-export const SelectPathToFile = (props: {}) => {
+export const SelectPathToFile = () => {
   const [clientTxTPath, setClientTxTPath] = useState("")
   const [productionConfigPath, setProductionConfigPath] = useState("")
   const [applicationLogsPath, setApplicationLogsPath] = useState("")
@@ -70,17 +70,9 @@ export const SelectPathToFile = (props: {}) => {
       setApplicationLogsPath(selected);
       info(`${selected}`);
     } else {
-      info(`User Cancelled Selection of Production Config`);
+      info(`User Cancelled Selection of Application Logs`);
     }
   }
-
-
-
-  const text = productionConfigPath
-  const displayText = text.length <= 20 ? text : '...' + text.slice(-17); // display last 17 characters
-  const handleTextChange = (event: any) => {
-  };
-
 
   return (
     <div>
