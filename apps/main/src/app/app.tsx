@@ -1,14 +1,14 @@
-import { Divider, TextField } from '@mui/material';
+import { Divider } from '@mui/material';
 import { styled } from '@mui/system';
-import { core } from "@poe-companion/core";
 import { SettingsManager } from "@poe-companion/settings-manager";
 import { ask, confirm, open } from '@tauri-apps/api/dialog';
 import { listen } from '@tauri-apps/api/event';
 import { appWindow } from '@tauri-apps/api/window';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { info } from "tauri-plugin-log-api";
 import { LangugeSelector } from './components/LangugeSelector';
+import { SelectPathToFile } from './components/SelectPathToFile';
 import { ShortcutsManager } from './components/ShortcutsManager';
 
 const listenToMouse = async () => {
@@ -18,13 +18,8 @@ const listenToMouse = async () => {
   });
 }
 
-
-
-
 export function App() {
   const { t, i18n } = useTranslation();
-
-
 
   useEffect(() => {
     info("Component Load")
@@ -45,15 +40,6 @@ export function App() {
   }, [])
 
 
-  core();
-
-  const Button = styled('button')({
-    color: 'darkslategray',
-    backgroundColor: 'aliceblue',
-    padding: 8,
-    borderRadius: 4,
-  });
-
   const MyThemeComponent = styled('div')(({ theme }) => ({
     color: theme.palette.chip.color,
     '&:hover': {
@@ -71,33 +57,14 @@ export function App() {
 
     info(`${yes}, ${yes2} ${confirmed} ${confirmed2}`);
 
-    const selected = await open({
-      multiple: true,
-      filters: [{
-        name: 'Image',
-        extensions: ['png', 'jpeg']
-      }]
-    });
-    if (Array.isArray(selected)) {
-      // user selected multiple files
-    } else if (selected === null) {
-      // user cancelled the selection
-    } else {
-      // user selected a single file
-    }
-    info(`${selected}`);
-
     info("A");
   }
 
 
 
   return (
-    <div
-      onMouseEnter={() => info("enter")}
-      onMouseLeave={() => info("leave")}>
+    <div>
       {t("title")}
-      <p>{t('title', { name: 'John' })}</p>
       <MyThemeComponent className="some-class">This is hotpink now! AFFIL affil</MyThemeComponent>
 
       <Divider style={{ margin: "5px" }} />
@@ -109,6 +76,8 @@ export function App() {
       <ShortcutsManager />
 
       <Divider style={{ margin: "5px" }} />
+
+      <SelectPathToFile />
 
 
 
