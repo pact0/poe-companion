@@ -1,0 +1,11 @@
+@font-face {
+    font-family: 'Fontin SmallCaps';
+    src: local('Fontin SmallCaps'), local('FontinSmallCaps'),
+    url('./Fontin-SmallCaps.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+}
+
+* {
+  font-family: "Fontin SmallCaps";
+}

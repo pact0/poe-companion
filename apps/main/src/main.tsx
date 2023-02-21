@@ -1,19 +1,23 @@
 import "@poe-companion/translations"
 import { StrictMode } from 'react';
-import { ThemeProvider } from '@emotion/react'
 import * as ReactDOM from 'react-dom/client';
 
 import App from './app/app';
-import { theme } from "@poe-companion/react-components"
+import { GlobalStyles, mui_theme, theme } from "@poe-companion/react-components"
 
+import { ThemeProvider as MuiThemeProvider } from "@mui/material/styles";
+import { ThemeProvider } from "@emotion/react";
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <StrictMode>
-    <ThemeProvider theme={theme}>
-      <App />
-    </ThemeProvider>
+    <MuiThemeProvider theme={mui_theme}>
+      <ThemeProvider theme={theme}>
+        <GlobalStyles />
+        <App />
+      </ThemeProvider>
+    </MuiThemeProvider>
   </StrictMode>
 );

@@ -31,6 +31,9 @@
           "$APPCONFIG/*"
         ]
       },
+      "globalShortcut": {
+        "all": true
+      },
       "path": {
         "all": true
       },
@@ -38,6 +41,38 @@
         "all": true,
         "open": true,
         "save": true
+      },
+      "window": {
+        "all": false,
+        "center": false,
+        "close": false,
+        "create": false,
+        "hide": false,
+        "maximize": false,
+        "minimize": false,
+        "print": false,
+        "requestUserAttention": false,
+        "setAlwaysOnTop": false,
+        "setCursorGrab": true,
+        "setCursorIcon": false,
+        "setCursorPosition": true,
+        "setCursorVisible": false,
+        "setDecorations": false,
+        "setFocus": false,
+        "setFullscreen": false,
+        "setIcon": false,
+        "setIgnoreCursorEvents": true,
+        "setMaxSize": false,
+        "setMinSize": false,
+        "setPosition": false,
+        "setResizable": false,
+        "setSize": false,
+        "setSkipTaskbar": false,
+        "setTitle": false,
+        "show": false,
+        "startDragging": false,
+        "unmaximize": false,
+        "unminimize": false
       }
     },
     "bundle": {
@@ -88,7 +123,7 @@
         "label": "main",
         "transparent": false,
         "hiddenTitle": false,
-        "decorations": true,
+        "decorations": false,
         "width": 800,
         "x": 100,
         "y": 100,

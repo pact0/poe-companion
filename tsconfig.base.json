@@ -22,6 +22,7 @@
     "paths": {
       "@poe-companion/core": ["libs/core/src/index.ts"],
       "@poe-companion/react-components": ["libs/react-components/src/index.ts"],
+      "@poe-companion/settings-manager": ["libs/settings-manager/src/index.ts"],
       "@poe-companion/translations": ["libs/translations/src/index.ts"]
     }
   },

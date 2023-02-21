@@ -9,6 +9,7 @@
 // use std::{thread::sleep, time::Duration};
 
 use log::{error, info, trace, warn};
+use rdev::{listen, Event};
 use sysinfo::{NetworkExt, NetworksExt, ProcessExt, System, SystemExt};
 use tauri::{CustomMenuItem, SystemTray, SystemTrayMenu};
 use tauri::{RunEvent, State};
@@ -79,6 +80,17 @@ fn not_windows_main() -> notify::Result<()> {
 }
 
 fn main() {
+    // if let Err(error) = listen(callback) {
+    //     println!("Error: {:?}", error)
+    // }
+    //
+    // fn callback(event: Event) {
+    //     println!("My callback {:?}", event);
+    //     match event.name {
+    //         Some(string) => println!("User wrote {:?}", string),
+    //         None => (),
+    //     }
+    // }
     // hosting::add_to_waitlist();
     let tray_menu = SystemTrayMenu::new(); // insert the menu items here
     let system_tray = SystemTray::new().with_menu(tray_menu);

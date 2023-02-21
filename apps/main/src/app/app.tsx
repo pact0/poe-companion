@@ -1,19 +1,65 @@
+import { Divider, TextField } from '@mui/material';
+import { styled } from '@mui/system';
+import { core } from "@poe-companion/core";
+import { SettingsManager } from "@poe-companion/settings-manager";
 import { ask, confirm, open } from '@tauri-apps/api/dialog';
-import { trace, info, error, attachConsole } from "tauri-plugin-log-api";
-import { core } from "@poe-companion/core"
+import { listen } from '@tauri-apps/api/event';
+import { appWindow } from '@tauri-apps/api/window';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import styled from '@emotion/styled';
-import { Button } from "@poe-companion/react-components"
+import { info } from "tauri-plugin-log-api";
+import { LangugeSelector } from './components/LangugeSelector';
+import { ShortcutsManager } from './components/ShortcutsManager';
+
+const listenToMouse = async () => {
+
+  const unlisten = await listen<string>('mouse-move', (event) => {
+    console.log(`Got error in window ${event.windowLabel}, payload: ${event.payload}`);
+  });
+}
+
 
 
 
 export function App() {
   const { t, i18n } = useTranslation();
+
+
+
+  useEffect(() => {
+    info("Component Load")
+    SettingsManager.get("startAtBoot").then((startAtBoot) => {
+      console.log("startAtBoot", startAtBoot)
+    })
+
+    appWindow.setIgnoreCursorEvents(false).then(() => {
+      info("Trans")
+    })
+    appWindow.listen<string>('state-changed', (event) => {
+      console.log(`Got error: ${event}`);
+    }).then(() => {
+      info("listener")
+    })
+
+    listenToMouse();
+  }, [])
+
+
   core();
 
-  const SomeText = styled.div`
-  color: ${props => props.theme.color.primary};
-`
+  const Button = styled('button')({
+    color: 'darkslategray',
+    backgroundColor: 'aliceblue',
+    padding: 8,
+    borderRadius: 4,
+  });
+
+  const MyThemeComponent = styled('div')(({ theme }) => ({
+    color: theme.palette.chip.color,
+    '&:hover': {
+      background: "#f00",
+    },
+  }));
 
   const doStuff = async () => {
 
@@ -44,22 +90,29 @@ export function App() {
     info("A");
   }
 
-  const changeL = () => {
-    i18n.changeLanguage("en")
-  }
+
 
   return (
-    <>
+    <div
+      onMouseEnter={() => info("enter")}
+      onMouseLeave={() => info("leave")}>
       {t("title")}
       <p>{t('title', { name: 'John' })}</p>
-      <p>{t('description.part1')}</p>
-      <p>{t('description.part2')}</p>
-      <button onClick={doStuff}>Click</button>
-      <button onClick={changeL}>Change to pl</button>
-      <SomeText>A</SomeText>
-      <Button>Button</Button>
-      button
-    </>
+      <MyThemeComponent className="some-class">This is hotpink now! AFFIL affil</MyThemeComponent>
+
+      <Divider style={{ margin: "5px" }} />
+
+      <LangugeSelector />
+
+      <Divider style={{ margin: "5px" }} />
+
+      <ShortcutsManager />
+
+      <Divider style={{ margin: "5px" }} />
+
+
+
+    </div>
   );
 }
 
