@@ -12,6 +12,7 @@ export type SettingsSchema = {
   accountName: string;
   language: "en" | "pl";
   version: string;
+  shortcuts: { key: string, desc: string }[]
 }
 
 export const DefaultSettings: SettingsSchema = {
@@ -25,6 +26,7 @@ export const DefaultSettings: SettingsSchema = {
   windowTitle: "Path of Exile",
   logLevel: "warn",
   accountName: "",
+  shortcuts: []
 }
 
 export let SettingsManager = new SM<SettingsSchema>(
