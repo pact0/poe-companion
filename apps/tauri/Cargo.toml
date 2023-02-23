@@ -26,6 +26,7 @@ log = "^0.4"
 notify = "5.1.0"
 file_watcher = {path = "src/file_watcher"}
 rdev = "0.5.2"
+enigo = "0.0.14"
 
 [features]
 # by default Tauri runs in production mode
