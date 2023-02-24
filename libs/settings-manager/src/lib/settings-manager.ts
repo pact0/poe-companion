@@ -13,6 +13,7 @@ export type SettingsSchema = {
   language: "en" | "pl";
   version: string;
   shortcuts: { key: string, desc: string }[]
+  windows: { relative_x: number, relative_y: number, name: string }[]
 }
 
 export const DefaultSettings: SettingsSchema = {
@@ -26,7 +27,8 @@ export const DefaultSettings: SettingsSchema = {
   windowTitle: "Path of Exile",
   logLevel: "warn",
   accountName: "",
-  shortcuts: []
+  shortcuts: [],
+  windows: [{ name: "main", relative_x: 200, relative_y: 150 }]
 }
 
 export let SettingsManager = new SM<SettingsSchema>(

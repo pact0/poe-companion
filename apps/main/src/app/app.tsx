@@ -1,15 +1,18 @@
-import { Divider } from '@mui/material';
+import { Divider, IconButton, List, ListItem, ListItemSecondaryAction, ListItemText, Menu, MenuItem } from '@mui/material';
 import { styled } from '@mui/system';
 import { SettingsManager } from "@poe-companion/settings-manager";
 import { ask, confirm, open } from '@tauri-apps/api/dialog';
 import { listen } from '@tauri-apps/api/event';
 import { appWindow } from '@tauri-apps/api/window';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { info } from "tauri-plugin-log-api";
 import { LangugeSelector } from './components/LangugeSelector';
 import { SelectPathToFile } from './components/SelectPathToFile';
 import { ShortcutsManager } from './components/ShortcutsManager';
+import Draggable, { DraggableData, DraggableEvent } from 'react-draggable';
+
+
 
 const listenToMouse = async () => {
 
@@ -20,11 +23,28 @@ const listenToMouse = async () => {
 
 export function App() {
   const { t, i18n } = useTranslation();
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+
+  const handleDrag = (e: DraggableEvent, data: DraggableData) => {
+    info(`${data.x} ${data.y}`)
+    setPosition({ x: data.x, y: data.y });
+  };
+
+
 
   useEffect(() => {
     info("Component Load")
     SettingsManager.get("startAtBoot").then((startAtBoot) => {
       console.log("startAtBoot", startAtBoot)
+    })
+
+    SettingsManager.get("windows").then((windows) => {
+      const main = windows.find((win) => win.name === "main")
+      console.log("windows", main)
+
+      if (main) {
+        setPosition({ x: main.relative_x, y: main.relative_y })
+      }
     })
 
     appWindow.setIgnoreCursorEvents(false).then(() => {
@@ -60,7 +80,20 @@ export function App() {
     info("A");
   }
 
+  const [anchorEl, setAnchorEl] = useState(null);
 
+  const handleItemClick = (event: any) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
+
+  useEffect(() => {
+    console.log(position)
+
+  }, [position])
 
   return (
     <div>
@@ -79,9 +112,60 @@ export function App() {
 
       <SelectPathToFile />
 
+      <div>
+        <List>
+          <ListItem button onClick={handleItemClick}>
+            <ListItemText primary="Item 1" />
+            <ListItemSecondaryAction>
+              <IconButton edge="end" onClick={handleItemClick}>
+                A
+              </IconButton>
+            </ListItemSecondaryAction>
+          </ListItem>
+          <ListItem button onClick={handleItemClick}>
+            <ListItemText primary="Item 2" />
+            <ListItemSecondaryAction>
+              <IconButton edge="end" onClick={handleItemClick}>
+                A
+              </IconButton>
+            </ListItemSecondaryAction>
+          </ListItem>
+          <ListItem button onClick={handleItemClick}>
+            <ListItemText primary="Item 3" />
+            <ListItemSecondaryAction>
+              <IconButton edge="end" onClick={handleItemClick}>
+                A
+                {/* <MoreVertIcon /> */}
+              </IconButton>
+            </ListItemSecondaryAction>
+          </ListItem>
+        </List>
+        <Menu
+          anchorEl={anchorEl}
+          open={Boolean(anchorEl)}
+          onClose={handleMenuClose}
+          anchorOrigin={{ vertical: "top", horizontal: "right" }}
+          transformOrigin={{ vertical: "top", horizontal: "right" }}
+        >
+          <MenuItem onClick={handleMenuClose}>Delete</MenuItem>
+          <MenuItem onClick={handleMenuClose}>Start</MenuItem>
+        </Menu>
+      </div>
 
+      <div style={{ width: '500px', height: '500px' }}>
+        <Draggable
+          handle=".handle"
+          defaultPosition={{ x: 0, y: 0 }}
+          position={position}
+          onStop={handleDrag}
+        >
+          <div className="handle" style={{ width: '50px', height: '50px', backgroundColor: 'blue' }}>
+            Drag me around
+          </div>
+        </Draggable>
+      </div>
 
-    </div>
+    </div >
   );
 }
 

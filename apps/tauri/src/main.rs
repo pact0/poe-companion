@@ -16,7 +16,7 @@ use crate::{
 };
 
 fn main() {
-    let log_path = std::path::PathBuf::from("/home/pacto/work/poe-companion/logs");
+    // let log_path = std::path::PathBuf::from("/home/pacto/work/poe-companion/logs");
 
     tauri::Builder::default()
         .plugin(
@@ -24,7 +24,7 @@ fn main() {
                 .targets([
                     LogTarget::LogDir,
                     LogTarget::Stdout,
-                    LogTarget::Folder(log_path),
+                    // LogTarget::Folder(log_path),
                 ])
                 .build(),
         )
