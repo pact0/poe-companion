@@ -37,13 +37,13 @@ fn callback(event: Event, win: &mut tauri::Window) {
         _ => (),
     }
 
-    match event.name {
-        Some(string) => info!(
-            "User wrote {:?} window is visible x:{},y{}   |  outer x:{},y:{}",
-            string, inner_x_top_left, inner_y_top_left, outer_x, outer_y
-        ),
-        None => (),
-    }
+    // match event.name {
+    //     Some(string) => info!(
+    //         "User wrote {:?} window is visible x:{},y{}   |  outer x:{},y:{}",
+    //         string, inner_x_top_left, inner_y_top_left, outer_x, outer_y
+    //     ),
+    //     None => (),
+    // }
 }
 
 pub fn setup(app: &mut App) -> Result<(), Box<dyn std::error::Error>> {

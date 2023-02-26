@@ -3,8 +3,13 @@ import React, { useEffect, useState } from 'react';
 import { isRegistered, register, unregister } from '@tauri-apps/api/globalShortcut';
 import { info } from 'tauri-plugin-log-api';
 
-export const ShortcutsManager = (props: {}) => {
-  const [hotkey, setHotkey] = useState('Ctrl+Alt+Del');
+interface Props {
+  shortcutName: string;
+  callbackOnUse: () => void;
+}
+
+export const Shortcut = ({ shortcutName, callbackOnUse }: Props) => {
+  const [hotkey, setHotkey] = useState('Not set');
 
   const mappings = {
     "Ctrl": "CommandOrControl",
@@ -46,18 +51,6 @@ export const ShortcutsManager = (props: {}) => {
     'Windows+L',
     'F5', 'F11', 'Ctrl+R', 'Ctrl+Shift+R'
   ];
-
-  useEffect(() => {
-    const a = async () => {
-      const isregistered: any = await isRegistered('CommandOrControl+P');
-      info(`is regsitered ${isregistered}`)
-      await register('CommandOrControl+P', () => {
-        info('Control+P Shortcut triggered');
-      });
-    }
-
-    a()
-  }, [])
   const handleHotkeyChange = (event: any) => {
     setHotkey(event.target.value);
   };
@@ -74,6 +67,7 @@ export const ShortcutsManager = (props: {}) => {
 
       await register(tauriNamingHotkey, () => {
         info(`New hotkey is ${tauriNamingHotkey}`);
+        callbackOnUse();
       });
       setHotkey(newHotkey);
     }
@@ -106,16 +100,14 @@ export const ShortcutsManager = (props: {}) => {
   };
 
   return (
-    <div>
-      <TextField
-        label="Show app hotkey"
-        value={`${hotkey}`}
-        onKeyDown={handleHotkeyKeyPress}
-        onChange={handleHotkeyChange}
-        margin="normal"
-        variant="outlined"
-        style={{ caretColor: "transparent", userSelect: "none" }}
-      />
-    </div>
+    <TextField
+      label={shortcutName}
+      value={`${hotkey}`}
+      onKeyDown={handleHotkeyKeyPress}
+      onChange={handleHotkeyChange}
+      margin="normal"
+      variant="outlined"
+      style={{ caretColor: "transparent", userSelect: "none" }}
+    />
   )
 }

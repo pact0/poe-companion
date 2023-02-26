@@ -5,12 +5,12 @@ import { ask, confirm, open } from '@tauri-apps/api/dialog';
 import { listen } from '@tauri-apps/api/event';
 import { appWindow } from '@tauri-apps/api/window';
 import { useEffect, useState } from 'react';
+import Draggable, { DraggableData, DraggableEvent } from 'react-draggable';
 import { useTranslation } from 'react-i18next';
 import { info } from "tauri-plugin-log-api";
 import { LangugeSelector } from './components/LangugeSelector';
 import { SelectPathToFile } from './components/SelectPathToFile';
-import { ShortcutsManager } from './components/ShortcutsManager';
-import Draggable, { DraggableData, DraggableEvent } from 'react-draggable';
+import { ShortcutsManager } from './components/Shortcuts/ShortcutsManager';
 
 
 
@@ -25,10 +25,11 @@ export function App() {
   const { t, i18n } = useTranslation();
   const [position, setPosition] = useState({ x: 0, y: 0 });
 
-  const handleDrag = (e: DraggableEvent, data: DraggableData) => {
+  function handleDrag(e: DraggableEvent, data: DraggableData) {
     info(`${data.x} ${data.y}`)
     setPosition({ x: data.x, y: data.y });
-  };
+
+  }
 
 
 
