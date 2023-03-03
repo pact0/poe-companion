@@ -126,13 +126,15 @@
         "resizable": true,
         "title": "main",
         "label": "main",
-        "transparent": false,
-        "hiddenTitle": false,
+        "transparent": true,
+        "hiddenTitle": true,
+        "skipTaskbar": false,
+        "focus": false,
         "decorations": false,
         "width": 800,
         "x": 100,
         "y": 100,
-        "alwaysOnTop": true,
+        "alwaysOnTop": false,
         "url": "./apps/main/index.html"
       }
     ]

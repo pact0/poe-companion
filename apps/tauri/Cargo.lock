@@ -1838,8 +1838,20 @@ dependencies = [
  "kqueue",
  "libc",
  "mio",
+ "serde",
  "walkdir",
  "windows-sys 0.42.0",
+]
+
+[[package]]
+name = "notify-debouncer-mini"
+version = "0.2.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "e23e9fa24f094b143c1eb61f90ac6457de87be6987bc70746e0179f7dbc9007b"
+dependencies = [
+ "crossbeam-channel",
+ "notify",
+ "serde",
 ]
 
 [[package]]
@@ -2287,15 +2299,19 @@ dependencies = [
  "inputbot",
  "log",
  "notify",
+ "notify-debouncer-mini",
  "rdev",
+ "regex",
  "serde",
  "serde_json",
  "sysinfo",
  "tauri",
  "tauri-build",
+ "tauri-plugin-fs-watch",
  "tauri-plugin-log",
  "tauri-plugin-positioner",
  "tauri-plugin-window-state",
+ "thiserror",
  "tokio",
 ]
 
@@ -3247,9 +3263,23 @@ dependencies = [
 ]
 
 [[package]]
+name = "tauri-plugin-fs-watch"
+version = "0.1.0"
+source = "git+https://github.com/tauri-apps/plugins-workspace?branch=dev#8f34eb83e4f9a8c72fd3823a066c94f861f2d021"
+dependencies = [
+ "log",
+ "notify",
+ "notify-debouncer-mini",
+ "serde",
+ "serde_json",
+ "tauri",
+ "thiserror",
+]
+
+[[package]]
 name = "tauri-plugin-log"
 version = "0.1.0"
-source = "git+https://github.com/tauri-apps/plugins-workspace?branch=dev#92d9f2754c34559a65392fd3e7eefbbcb060ff68"
+source = "git+https://github.com/tauri-apps/plugins-workspace?branch=dev#8f34eb83e4f9a8c72fd3823a066c94f861f2d021"
 dependencies = [
  "byte-unit",
  "fern",
@@ -3276,7 +3306,7 @@ dependencies = [
 [[package]]
 name = "tauri-plugin-window-state"
 version = "0.1.0"
-source = "git+https://github.com/tauri-apps/plugins-workspace?branch=dev#92d9f2754c34559a65392fd3e7eefbbcb060ff68"
+source = "git+https://github.com/tauri-apps/plugins-workspace?branch=dev#8f34eb83e4f9a8c72fd3823a066c94f861f2d021"
 dependencies = [
  "bincode",
  "bitflags",

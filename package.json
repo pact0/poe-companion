@@ -9,6 +9,7 @@
   "dependencies": {
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
+    "@mui/icons-material": "^5.11.9",
     "@mui/material": "^5.11.9",
     "@nrwl/node": "^15.7.2",
     "@tauri-apps/api": "^1.2.0",
@@ -20,6 +21,7 @@
     "react-dom": "18.2.0",
     "react-draggable": "^4.4.5",
     "react-i18next": "^12.1.5",
+    "tauri-plugin-fs-watch-api": "https://github.com/tauri-apps/tauri-plugin-fs-watch",
     "tauri-plugin-log-api": "https://github.com/tauri-apps/tauri-plugin-log",
     "tauri-settings": "^0.3.0",
     "tslib": "^2.3.0"

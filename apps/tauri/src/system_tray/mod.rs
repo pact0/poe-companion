@@ -3,10 +3,12 @@ use tauri::{Manager, SystemTrayEvent};
 pub fn setup_system_tray() -> tauri::SystemTray {
     let quit = tauri::CustomMenuItem::new("quit".to_string(), "Quit");
     let hide = tauri::CustomMenuItem::new("hide".to_string(), "Hide");
+    let settings = tauri::CustomMenuItem::new("settings".to_string(), "Settings");
 
     let tray_menu = tauri::SystemTrayMenu::new()
         .add_native_item(tauri::SystemTrayMenuItem::Separator)
         .add_item(hide)
+        .add_item(settings)
         .add_item(quit);
 
     tauri::SystemTray::new().with_menu(tray_menu)
@@ -54,6 +56,9 @@ pub fn on_system_tray_event(app: &tauri::AppHandle, event: tauri::SystemTrayEven
                     window.show().unwrap();
                     item_handle.set_title("Hide").unwrap();
                     println!("show {}", id);
+                }
+                "settings" => {
+                    println!("settings {}", id);
                 }
                 _ => {}
             }
